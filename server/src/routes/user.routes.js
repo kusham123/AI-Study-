@@ -1,0 +1,10 @@
+import { Router } from 'express';
+import { asyncHandler as h } from '../utils/asyncHandler.js';
+import { allow } from '../middleware/auth.js';
+import * as c from '../controllers/user.controller.js';
+const r = Router();
+r.use(allow('admin'));
+r.get('/', h(c.list));
+r.put('/:id/role', h(c.updateRole));
+r.delete('/:id', h(c.remove));
+export default r;
